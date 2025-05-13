@@ -17,8 +17,10 @@ const App: React.FC = () => {
   } = useDateRange('2024-12-01', '2024-12-31')
 
   return (
-    <div className="p-4 max-w-md mx-auto font-sans ">
-      <h2 className="text-2xl font-bold mb-4">SlideSearcher</h2>
+    <div className="p-4 max-w-md mx-auto font-sans bg-light-primary text-dark-primary">
+      <h2 className="text-2xl font-bold mb-4 text-dark-secondary">
+        SlideSearcher
+      </h2>
       <div className="space-y-2">
         <label className="block">
           Query:{' '}
