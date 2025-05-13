@@ -69,27 +69,41 @@ export const QueryForm: React.FC<QueryFormProps> = ({
           </label>
         </div>
       </label>
-      <br />
-      <label className="block">
-        Start:{' '}
-        <input
-          type="date"
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
-        />
-      </label>
-      <br />
-      <label className="block">
-        End:{' '}
-        <input
-          type="date"
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
-        />
-      </label>
-      <br />
+      <div className="flex">
+        <label className="block">
+          Start:{' '}
+          <input
+            type="date"
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
+          />
+        </label>
+        <label className="block">
+          End:{' '}
+          <input
+            type="date"
+            value={end}
+            onChange={(e) => setEnd(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
+          />
+        </label>
+      </div>
+
+      <div className="flex justify-end space-x-2">
+        <button
+          onClick={() => addMonthsToEnd(-1)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-sm"
+        >
+          -1 Month
+        </button>
+        <button
+          onClick={() => addMonthsToEnd(1)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-sm"
+        >
+          +1 Month
+        </button>
+      </div>
       <div className="flex space-x-2">
         <button
           onClick={() => slideMonth(-1)}
@@ -101,38 +115,21 @@ export const QueryForm: React.FC<QueryFormProps> = ({
           onClick={step}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          → Step
-        </button>
-        <button
-          onClick={() => slideMonth(1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
           Next Month →
         </button>
       </div>
-      <br />
-      <div className="flex space-x-2">
-        <button
-          onClick={() => addMonthsToEnd(1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          +1 Month
-        </button>
-        <button
-          onClick={() => addMonthsToEnd(-1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          -1 Month
-        </button>
-      </div>
-      <br />
       <button
         onClick={() => addYears(-1)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        ← 1 Year
+        ←← Prev Year
       </button>
-      <br />
+      <button
+        onClick={() => addYears(-1)}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Next Year →→
+      </button>
     </div>
   )
 }
