@@ -17,79 +17,116 @@ const App: React.FC = () => {
   } = useDateRange('2024-12-01', '2024-12-31')
 
   return (
-    <div
-      style={{
-        padding: 20,
-        maxWidth: 600,
-        margin: 'auto',
-        fontFamily: 'sans-serif',
-      }}
-    >
-      <h2>SlideSearcher</h2>
-      <div>
-        <label>
+    <div className="p-4 max-w-md mx-auto font-sans ">
+      <h2 className="text-2xl font-bold mb-4">SlideSearcher</h2>
+      <div className="space-y-2">
+        <label className="block">
           Query:{' '}
-          <input value={query} onChange={(e) => setQuery(e.target.value)} />
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </label>
         <br />
-        <label>
+        <label className="block">
           Mode:
-          <label>
-            <input
-              type="radio"
-              value=""
-              checked={mode === ''}
-              onChange={(e) => setMode(e.target.value)}
-            />{' '}
-            Normal
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="vid"
-              checked={mode === 'vid'}
-              onChange={(e) => setMode(e.target.value)}
-            />{' '}
-            Video
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="isch"
-              checked={mode === 'isch'}
-              onChange={(e) => setMode(e.target.value)}
-            />{' '}
-            Image
-          </label>
+          <div className="flex">
+            <label className="inline-flex items-center mr-4">
+              <input
+                type="radio"
+                value=""
+                checked={mode === ''}
+                onChange={(e) => setMode(e.target.value)}
+                className="mr-2"
+              />
+              <span>Normal</span>
+            </label>
+            <label className="inline-flex items-center mr-4">
+              <input
+                type="radio"
+                value="vid"
+                checked={mode === 'vid'}
+                onChange={(e) => setMode(e.target.value)}
+                className="mr-2"
+              />
+              <span>Video</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                value="isch"
+                checked={mode === 'isch'}
+                onChange={(e) => setMode(e.target.value)}
+                className="mr-2"
+              />
+              <span>Image</span>
+            </label>
+          </div>
         </label>
         <br />
-        <label>
+        <label className="block">
           Start:{' '}
           <input
             type="date"
             value={start}
             onChange={(e) => setStart(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
           />
         </label>
         <br />
-        <label>
+        <label className="block">
           End:{' '}
           <input
             type="date"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"
           />
         </label>
         <br />
-        <button onClick={() => slideMonth(-1)}>← Prev Month</button>
-        <button onClick={step}>→ Step</button>
-        <button onClick={() => slideMonth(1)}>Next Month →</button>
+        <div className="flex space-x-2">
+          <button
+            onClick={() => slideMonth(-1)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            ← Prev Month
+          </button>
+          <button
+            onClick={step}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            → Step
+          </button>
+          <button
+            onClick={() => slideMonth(1)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Next Month →
+          </button>
+        </div>
         <br />
-        <button onClick={() => addMonthsToEnd(1)}>+1 Month</button>
-        <button onClick={() => addMonthsToEnd(-1)}>-1 Month</button>
+        <div className="flex space-x-2">
+          <button
+            onClick={() => addMonthsToEnd(1)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            +1 Month
+          </button>
+          <button
+            onClick={() => addMonthsToEnd(-1)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            -1 Month
+          </button>
+        </div>
         <br />
-        <button onClick={() => addYears(-1)}>← 1 Year</button>
-        <br />
+        <button
+          onClick={() => addYears(-1)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          ← 1 Year
+        </button>
         <br />
         <UrlGenerator query={query} start={start} end={end} mode={mode} />
       </div>

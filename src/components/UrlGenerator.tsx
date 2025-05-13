@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import OpenButton from './OpenButton'
 
 interface Props {
   query: string
@@ -26,8 +27,19 @@ export const UrlGenerator: React.FC<Props> = ({ query, start, end, mode }) => {
 
   return (
     <div>
-      <button onClick={generate}>Generate URL</button>
-      <textarea rows={3} style={{ width: '100%' }} value={url} readOnly />
+      <button
+        onClick={generate}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Generate URL
+      </button>
+      {url && <OpenButton url={url} />}
+      <textarea
+        rows={3}
+        className="w-full border border-gray-300 rounded"
+        value={url}
+        readOnly
+      />
     </div>
   )
 }
