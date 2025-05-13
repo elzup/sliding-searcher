@@ -8,6 +8,7 @@ import {
 } from 'react-icons/ti'
 import { IconButton } from './components/IconButton'
 import { QueryInput } from './components/QueryInput'
+import { DateRangeBar } from './components/DateRangeBar'
 
 interface QueryFormProps {
   query: string
@@ -41,7 +42,7 @@ export const QueryForm: React.FC<QueryFormProps> = ({
   return (
     <div className="space-y-2">
       <QueryInput query={query} setQuery={setQuery} />
-      <br />
+      <DateRangeBar start={start} end={end} />
       <label className="block">
         Mode:
         <div className="flex">
