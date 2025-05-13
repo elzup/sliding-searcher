@@ -1,4 +1,12 @@
 import React from 'react'
+import { RiExpandRightLine } from 'react-icons/ri'
+import {
+  TiMediaFastForward,
+  TiMediaPlay,
+  TiMediaPlayReverse,
+  TiMediaRewind,
+} from 'react-icons/ti'
+import { IconButton } from './components/IconButton'
 import { QueryInput } from './components/QueryInput'
 
 interface QueryFormProps {
@@ -91,45 +99,47 @@ export const QueryForm: React.FC<QueryFormProps> = ({
       </div>
 
       <div className="flex justify-end space-x-2">
-        <button
+        <IconButton
+          icon={RiExpandRightLine}
+          text="-1 Month"
           onClick={() => addMonthsToEnd(-1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-sm"
-        >
-          -1 Month
-        </button>
-        <button
+          className="text-xs"
+          iconPosition="right"
+        />
+        <IconButton
+          icon={RiExpandRightLine}
+          text="+1 Month"
           onClick={() => addMonthsToEnd(1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-sm"
-        >
-          +1 Month
-        </button>
+          className="text-sm"
+          iconPosition="right"
+        />
       </div>
-      <div className="flex space-x-2">
-        <button
+      <div className="flex justify-center space-x-2">
+        <IconButton
+          icon={TiMediaRewind}
+          text="Prev Year"
+          onClick={() => addYears(-1)}
+          className="text-xs"
+        />
+        <IconButton
+          icon={TiMediaPlayReverse}
+          text="Step"
           onClick={() => slideMonth(-1)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          ← Prev Month
-        </button>
-        <button
+        />
+        <IconButton
+          icon={TiMediaPlay}
+          text="Step"
           onClick={step}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Next Month →
-        </button>
+          iconPosition="right"
+        />
+        <IconButton
+          icon={TiMediaFastForward}
+          text="Next Year"
+          onClick={() => addYears(-1)}
+          iconPosition="right"
+          className="text-xs"
+        />
       </div>
-      <button
-        onClick={() => addYears(-1)}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        ←← Prev Year
-      </button>
-      <button
-        onClick={() => addYears(-1)}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Next Year →→
-      </button>
     </div>
   )
 }
