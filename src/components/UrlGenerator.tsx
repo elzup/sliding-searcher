@@ -1,38 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
+import type { SearchParam } from '../types'
 
-interface Props {
-  query: string
-  start: string
-  end: string
-  mode: string
+const generateSearchUrl = ({ query, start, end, mode }: SearchParam) => {
+  const q = encodeURIComponent(query)
+  const startDate = new Date(start)
+  const endDate = new Date(end)
+  const startStr = `${
+    startDate.getMonth() + 1
+  }/${startDate.getDate()}/${startDate.getFullYear()}`
+  const endStr = `${
+    endDate.getMonth() + 1
+  }/${endDate.getDate()}/${endDate.getFullYear()}`
+  return `https://www.google.com/search?q=${q}&tbs=cdr:1,cd_min:${startStr},cd_max:${endStr}&tbm=${mode}`
 }
 
-export const UrlGenerator: React.FC<Props> = ({ query, start, end, mode }) => {
-  const [url, setUrl] = useState('')
+interface Props {
+  param: SearchParam
+}
 
-  const generate = () => {
-    const q = encodeURIComponent(query)
-    const startDate = new Date(start)
-    const endDate = new Date(end)
-    const startStr = `${
-      startDate.getMonth() + 1
-    }/${startDate.getDate()}/${startDate.getFullYear()}`
-    const endStr = `${
-      endDate.getMonth() + 1
-    }/${endDate.getDate()}/${endDate.getFullYear()}`
-    const link = `https://www.google.com/search?q=${q}&tbs=cdr:1,cd_min:${startStr},cd_max:${endStr}&tbm=${mode}`
-    setUrl(link)
-  }
+export const UrlGenerator: React.FC<Props> = ({ param }) => {
+  const url = generateSearchUrl(param)
 
   return (
     <div className="w-full">
       <div className="flex items-center">
-        <button
-          onClick={generate}
-          className="bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 font-bold py-2 px-4 rounded-l"
-        >
-          Generate URL
-        </button>
         <input
           type="text"
           className="w-full border border-gray-300 rounded-r shadow-md focus:outline-none focus:ring-2 focus:ring-blue-200"

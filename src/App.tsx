@@ -18,7 +18,7 @@ const App: React.FC = () => {
   } = useDateRange('2024-12-01', '2024-12-31')
 
   return (
-    <div className="p-4 max-w-md mx-auto font-sans bg-light-primary text-dark-primary">
+    <div className="p-4 max-w-lg mx-auto font-sans bg-light-primary text-dark-primary">
       <h2 className="text-2xl font-bold mb-4 text-dark-secondary">
         SlideSearcher
       </h2>
@@ -36,7 +36,14 @@ const App: React.FC = () => {
         addMonthsToEnd={addMonthsToEnd}
         addYears={addYears}
       />
-      <UrlGenerator query={query} start={start} end={end} mode={mode} />
+      <UrlGenerator
+        param={{
+          query,
+          start,
+          end,
+          mode,
+        }}
+      />
     </div>
   )
 }
