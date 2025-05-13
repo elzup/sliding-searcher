@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useLocalStorage } from './useLocalStorage'
 
 export function useDateRange(initialStart: string, initialEnd: string) {
-  const [start, setStart] = useState(initialStart)
-  const [end, setEnd] = useState(initialEnd)
+  // YYYY-MM-DD
+  const [start, setStart] = useLocalStorage('start', initialStart)
+  const [end, setEnd] = useLocalStorage('end', initialEnd)
 
   const slideMonth = (delta: number) => {
     const s = new Date(start)
