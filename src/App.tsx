@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { UrlGenerator } from './components/UrlGenerator'
 import { useDateRange } from './hooks/useDateRange'
 import { useLocalStorage } from './hooks/useLocalStorage'
@@ -6,7 +5,7 @@ import { QueryForm } from './QueryForm'
 
 const App = () => {
   const [query, setQuery] = useLocalStorage('query', '')
-  const [mode, setMode] = useState('')
+  const [mode, setMode] = useLocalStorage('mode', '') // '' | 'vid' | 'isch'
   const {
     start,
     end,
