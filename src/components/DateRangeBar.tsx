@@ -13,7 +13,7 @@ import {
 // 定数
 const CANVAS_WIDTH = 600
 const CANVAS_HEIGHT = 80
-const MONTH_LABEL_Y_POSITION = 10
+const MONTH_LABEL_Y_POSITION = 30
 const RANGE_RECT_Y_POSITION = 20
 const RANGE_RECT_HEIGHT = 40
 const DATE_TEXT_Y_POSITION = 75
@@ -22,7 +22,7 @@ const RANGE_FILL_COLOR = 'rgba(100, 149, 237, 0.4)'
 const RANGE_STROKE_COLOR = 'blue'
 const TEXT_COLOR = '#333'
 const ERROR_TEXT_COLOR = 'red'
-const FONT_STYLE = '10px sans-serif'
+const FONT_STYLE = '12px sans-serif'
 
 interface DateRangeBarProps {
   start: string // YYYY-MM-DD
@@ -34,9 +34,7 @@ const drawTimeline = (
   canvasWidth: number,
   canvasHeight: number,
   startStr: string,
-  endStr: string,
-  start: string,
-  end: string
+  endStr: string
 ) => {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
@@ -101,10 +99,28 @@ const drawTimeline = (
     const month = currentMonth.getMonth() + 1
     const isJanuary = month === 1
     const isEdge =
-      currentMonth.getTime() === startOfMonth(parseISO(start)).getTime() ||
-      currentMonth.getTime() === startOfMonth(parseISO(end)).getTime()
-    const formatString = isJanuary || isEdge ? 'yyyy/MM' : 'MM'
-    ctx.fillText(format(currentMonth, formatString), x, MONTH_LABEL_Y_POSITION)
+      currentMonth.getTime() === startOfMonth(parseISO(startStr)).getTime() ||
+      currentMonth.getTime() === startOfMonth(parseISO(endStr)).getTime()
+
+    // 2.5年を超える場合は月の表示を省略
+    const diffYears =
+      differenceInDays(parseISO(endStr), parseISO(startStr)) / 365.25
+    const showMonth = diffYears <= 2.5
+
+    let yearText = ''
+    let monthText = ''
+
+    if (isJanuary || isEdge) {
+      yearText = format(currentMonth, 'yyyy')
+    } else {
+      yearText = ''
+    }
+    if (showMonth || isJanuary || isEdge) {
+      monthText = format(currentMonth, 'MM')
+    }
+
+    ctx.fillText(yearText, x, MONTH_LABEL_Y_POSITION - 10) // 年を上に表示
+    ctx.fillText(monthText, x, MONTH_LABEL_Y_POSITION + 10) // 月を下に表示
 
     currentMonth = addMonths(currentMonth, 1)
   }
@@ -153,8 +169,6 @@ export const DateRangeBar = React.memo(
         ctx,
         parseFloat(canvas.style.width || '0'),
         parseFloat(canvas.style.height || '0'),
-        start,
-        end,
         start,
         end
       )
