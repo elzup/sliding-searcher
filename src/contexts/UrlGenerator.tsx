@@ -1,24 +1,11 @@
-import type { SearchParam } from '../types'
+import { useQuery } from '../hooks/useQueryContext'
+import { generateSearchUrl } from '../utils/urlUtils'
 
-const generateSearchUrl = ({ query, start, end, mode }: SearchParam) => {
-  const q = encodeURIComponent(query)
-  const startDate = new Date(start)
-  const endDate = new Date(end)
-  const startStr = `${
-    startDate.getMonth() + 1
-  }/${startDate.getDate()}/${startDate.getFullYear()}`
-  const endStr = `${
-    endDate.getMonth() + 1
-  }/${endDate.getDate()}/${endDate.getFullYear()}`
-  return `https://www.google.com/search?q=${q}&tbs=cdr:1,cd_min:${startStr},cd_max:${endStr}&tbm=${mode}`
-}
+export const UrlGenerator = () => {
+  const { query, start, end, mode } = useQuery()
+  const params = { query, start, end, mode }
 
-interface Props {
-  param: SearchParam
-}
-
-export const UrlGenerator = ({ param }: Props) => {
-  const url = generateSearchUrl(param)
+  const url = generateSearchUrl(params)
 
   return (
     <div className="w-full">

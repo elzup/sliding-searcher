@@ -1,5 +1,5 @@
 import React from 'react'
-import { UrlGenerator } from './components/UrlGenerator'
+import { UrlGenerator } from './contexts/UrlGenerator'
 import { QueryProvider } from './hooks/useQueryContext'
 import { QueryForm } from './QueryForm'
 

@@ -1,9 +1,7 @@
-interface Props {
-  query: string
-  setQuery: (query: string) => void
-}
+import { useQuery } from '../hooks/useQueryContext'
 
-export const QueryInput = ({ query, setQuery }: Props) => {
+export const QueryInput = () => {
+  const { query, setQuery } = useQuery()
   return (
     <label className="block">
       Query:

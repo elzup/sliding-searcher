@@ -1,62 +1,14 @@
-import { RiExpandRightLine } from 'react-icons/ri'
-import {
-  TiMediaFastForward,
-  TiMediaPlay,
-  TiMediaPlayReverse,
-  TiMediaRewind,
-} from 'react-icons/ti'
 import { DateRangeBar } from './components/DateRangeBar'
-import { IconButton } from './components/IconButton'
-import { QueryInput } from './components/QueryInput'
+import { ModeSelector } from './contexts/ModeSelector'
+import { QueryInput } from './contexts/QueryInput'
+import { ShortcutButtons } from './contexts/ShortcutButtons'
 import { useQuery } from './hooks/useQueryContext'
 
-export const ModeSelector = () => {
-  const { mode, setMode } = useQuery()
-
-  return (
-    <label className="block">
-      Mode:
-      <div className="flex">
-        <label className="inline-flex items-center mr-4">
-          <input
-            type="radio"
-            value=""
-            checked={mode === ''}
-            onChange={(e) => setMode(e.target.value)}
-            className="mr-2"
-          />
-          <span>Normal</span>
-        </label>
-        <label className="inline-flex items-center mr-4">
-          <input
-            type="radio"
-            value="vid"
-            checked={mode === 'vid'}
-            onChange={(e) => setMode(e.target.value)}
-            className="mr-2"
-          />
-          <span>Video</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            value="isch"
-            checked={mode === 'isch'}
-            onChange={(e) => setMode(e.target.value)}
-            className="mr-2"
-          />
-          <span>Image</span>
-        </label>
-      </div>
-    </label>
-  )
-}
-
 export const QueryForm = () => {
-  const { query, setQuery, start, end, setStart, setEnd } = useQuery()
+  const { start, end, setStart, setEnd } = useQuery()
   return (
     <div className="space-y-2">
-      <QueryInput query={query} setQuery={setQuery} />
+      <QueryInput />
       <DateRangeBar start={start} end={end} />
       <ModeSelector />
       {/* half left and right */}
@@ -80,49 +32,7 @@ export const QueryForm = () => {
           />
         </label>
       </div>
-
-      <div className="flex justify-end space-x-2">
-        <IconButton
-          icon={RiExpandRightLine}
-          text="-1 Month"
-          onClick={() => addMonthsToEnd(-1)}
-          className="text-xs"
-          iconPosition="right"
-        />
-        <IconButton
-          icon={RiExpandRightLine}
-          text="+1 Month"
-          onClick={() => addMonthsToEnd(1)}
-          className="text-sm"
-          iconPosition="right"
-        />
-      </div>
-      <div className="flex justify-center space-x-2">
-        <IconButton
-          icon={TiMediaRewind}
-          text="Prev Year"
-          onClick={() => addYears(-1)}
-          className="text-xs"
-        />
-        <IconButton
-          icon={TiMediaPlayReverse}
-          text="Step"
-          onClick={() => slideMonth(-1)}
-        />
-        <IconButton
-          icon={TiMediaPlay}
-          text="Step"
-          onClick={step}
-          iconPosition="right"
-        />
-        <IconButton
-          icon={TiMediaFastForward}
-          text="Next Year"
-          onClick={() => addYears(-1)}
-          iconPosition="right"
-          className="text-xs"
-        />
-      </div>
+      <ShortcutButtons />
     </div>
   )
 }
