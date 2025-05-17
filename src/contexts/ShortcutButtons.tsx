@@ -9,24 +9,49 @@ import { IconButton } from '../components/IconButton'
 import { useQuery } from '../hooks/useQueryContext'
 
 export const ShortcutButtons = () => {
-  const { addMonthsToEnd, addYears, slideMonth, step } = useQuery()
+  const q = useQuery()
+  const { addMonthsToEnd, addMonthsToStart, addYears, slideMonth, step } = q
   return (
-    <div>
-      <div className="flex justify-end space-x-2">
-        <IconButton
-          icon={RiExpandRightLine}
-          text="-1 Month"
-          onClick={() => addMonthsToEnd(-1)}
-          className="text-xs"
-          iconPosition="right"
-        />
-        <IconButton
-          icon={RiExpandRightLine}
-          text="+1 Month"
-          onClick={() => addMonthsToEnd(1)}
-          className="text-sm"
-          iconPosition="right"
-        />
+    <div className="grid gap-2">
+      <div className="flex justify-between w-full">
+        <div className="flex justify-start space-x-1">
+          <IconButton
+            text="-3M"
+            onClick={() => addMonthsToStart(-3)}
+            className="text-xs"
+          />
+          <IconButton
+            // icon={Ri}
+            text="Today"
+            onClick={() => {
+              q.setStartToday()
+            }}
+            className="text-xs"
+          />
+        </div>
+
+        <div className="flex justify-end space-x-1">
+          <IconButton
+            icon={RiExpandRightLine}
+            text="-1M"
+            onClick={() => addMonthsToEnd(-1)}
+            className="text-xs"
+          />
+          <IconButton
+            icon={RiExpandRightLine}
+            text="+1M"
+            onClick={() => addMonthsToEnd(1)}
+            className="text-xs"
+          />
+          <IconButton
+            // icon={Ri}
+            text="Today"
+            onClick={() => {
+              q.setEndToday()
+            }}
+            className="text-xs"
+          />
+        </div>
       </div>
       <div className="flex justify-center space-x-2">
         <IconButton

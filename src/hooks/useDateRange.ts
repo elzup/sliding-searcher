@@ -33,6 +33,12 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     setEndDate(e)
   }
 
+  const addMonthsToStart = (delta: number) => {
+    const s = new Date(start)
+    s.setMonth(s.getMonth() + delta)
+    setStartDate(s)
+  }
+
   const addYears = (delta: number) => {
     const s = new Date(start)
     const e = new Date(end)
@@ -50,6 +56,13 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     slideMonth,
     step,
     addMonthsToEnd,
+    addMonthsToStart,
     addYears,
+    setEndToday: () => {
+      setEndDate(new Date())
+    },
+    setStartToday: () => {
+      setStartDate(new Date())
+    },
   }
 }

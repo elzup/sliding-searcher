@@ -1,7 +1,7 @@
 import type { IconType } from 'react-icons'
 
 type Props = {
-  icon: IconType
+  icon?: IconType
   text: string
   onClick: () => void
   className?: string
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const IconButton = ({
-  icon: Icon,
+  icon: Icon = () => null,
   text,
   onClick,
   className,
