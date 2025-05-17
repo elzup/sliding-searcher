@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, type JSX } from 'react'
 import {
   parseISO,
   format,
@@ -34,7 +34,9 @@ const drawTimeline = (
   canvasWidth: number,
   canvasHeight: number,
   startStr: string,
-  endStr: string
+  endStr: string,
+  start: string,
+  end: string
 ) => {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
@@ -96,7 +98,13 @@ const drawTimeline = (
     ctx.stroke()
 
     // 月のラベルを描画 (位置を調整)
-    ctx.fillText(format(currentMonth, 'yyyy/MM'), x, MONTH_LABEL_Y_POSITION)
+    const month = currentMonth.getMonth() + 1
+    const isJanuary = month === 1
+    const isEdge =
+      currentMonth.getTime() === startOfMonth(parseISO(start)).getTime() ||
+      currentMonth.getTime() === startOfMonth(parseISO(end)).getTime()
+    const formatString = isJanuary || isEdge ? 'yyyy/MM' : 'MM'
+    ctx.fillText(format(currentMonth, formatString), x, MONTH_LABEL_Y_POSITION)
 
     currentMonth = addMonths(currentMonth, 1)
   }
@@ -145,6 +153,8 @@ export const DateRangeBar = React.memo(
         ctx,
         parseFloat(canvas.style.width || '0'),
         parseFloat(canvas.style.height || '0'),
+        start,
+        end,
         start,
         end
       )
