@@ -9,7 +9,6 @@ export const QueryForm = () => {
   return (
     <div className="space-y-2">
       <QueryInput />
-      <DateRangeBar start={start} end={end} />
       <ModeSelector />
       {/* half left and right */}
       <div className="flex justify-between w-full">
@@ -32,6 +31,7 @@ export const QueryForm = () => {
           />
         </label>
       </div>
+      <DateRangeBar start={start} end={end} />
       <ShortcutButtons />
     </div>
   )
