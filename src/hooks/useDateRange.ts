@@ -1,3 +1,4 @@
+import { formatDate } from '../utils/dateUtils'
 import { useLocalStorage } from './useLocalStorage'
 
 export function useDateRange(initialStart: string, initialEnd: string) {
@@ -10,8 +11,8 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     const e = new Date(end)
     s.setMonth(s.getMonth() + delta)
     e.setMonth(e.getMonth() + delta)
-    setStart(s.toISOString().split('T')[0])
-    setEnd(e.toISOString().split('T')[0])
+    setStart(formatDate(s))
+    setEnd(formatDate(e))
   }
 
   const step = () => {
@@ -20,8 +21,8 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     const diff = e.getTime() - s.getTime()
     const newStart = new Date(e)
     const newEnd = new Date(e.getTime() + diff)
-    setStart(newStart.toISOString().split('T')[0])
-    setEnd(newEnd.toISOString().split('T')[0])
+    setStart(formatDate(newStart))
+    setEnd(formatDate(newEnd))
   }
 
   const addMonthsToEnd = (delta: number) => {
@@ -35,8 +36,8 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     const e = new Date(end)
     s.setFullYear(s.getFullYear() + delta)
     e.setFullYear(e.getFullYear() + delta)
-    setStart(s.toISOString().split('T')[0])
-    setEnd(e.toISOString().split('T')[0])
+    setStart(formatDate(s))
+    setEnd(formatDate(e))
   }
 
   return {

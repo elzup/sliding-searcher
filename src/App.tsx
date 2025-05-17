@@ -2,6 +2,7 @@ import { UrlGenerator } from './components/UrlGenerator'
 import { useDateRange } from './hooks/useDateRange'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { QueryForm } from './QueryForm'
+import { formatDate } from './utils/dateUtils'
 
 const App = () => {
   const [query, setQuery] = useLocalStorage('query', '')
@@ -15,7 +16,10 @@ const App = () => {
     step,
     addMonthsToEnd,
     addYears,
-  } = useDateRange('2024-12-01', '2024-12-31')
+  } = useDateRange(
+    formatDate(new Date(new Date().setMonth(new Date().getMonth() - 3))),
+    formatDate(new Date())
+  )
 
   return (
     <div className="p-4 max-w-lg mx-auto font-sans bg-light-primary text-dark-primary">
