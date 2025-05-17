@@ -8,75 +8,57 @@ import {
 import { DateRangeBar } from './components/DateRangeBar'
 import { IconButton } from './components/IconButton'
 import { QueryInput } from './components/QueryInput'
+import { useQuery } from './hooks/useQueryContext'
 
-interface Props {
-  query: string
-  setQuery: (query: string) => void
-  mode: string
-  setMode: (mode: string) => void
-  start: string
-  setStart: (start: string) => void
-  end: string
-  setEnd: (end: string) => void
-  slideMonth: (amount: number) => void
-  step: () => void
-  addMonthsToEnd: (amount: number) => void
-  addYears: (amount: number) => void
+export const ModeSelector = () => {
+  const { mode, setMode } = useQuery()
+
+  return (
+    <label className="block">
+      Mode:
+      <div className="flex">
+        <label className="inline-flex items-center mr-4">
+          <input
+            type="radio"
+            value=""
+            checked={mode === ''}
+            onChange={(e) => setMode(e.target.value)}
+            className="mr-2"
+          />
+          <span>Normal</span>
+        </label>
+        <label className="inline-flex items-center mr-4">
+          <input
+            type="radio"
+            value="vid"
+            checked={mode === 'vid'}
+            onChange={(e) => setMode(e.target.value)}
+            className="mr-2"
+          />
+          <span>Video</span>
+        </label>
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            value="isch"
+            checked={mode === 'isch'}
+            onChange={(e) => setMode(e.target.value)}
+            className="mr-2"
+          />
+          <span>Image</span>
+        </label>
+      </div>
+    </label>
+  )
 }
 
-export const QueryForm = ({
-  query,
-  setQuery,
-  mode,
-  setMode,
-  start,
-  setStart,
-  end,
-  setEnd,
-  slideMonth,
-  step,
-  addMonthsToEnd,
-  addYears,
-}: Props) => {
+export const QueryForm = () => {
+  const { query, setQuery, start, end, setStart, setEnd } = useQuery()
   return (
     <div className="space-y-2">
       <QueryInput query={query} setQuery={setQuery} />
       <DateRangeBar start={start} end={end} />
-      <label className="block">
-        Mode:
-        <div className="flex">
-          <label className="inline-flex items-center mr-4">
-            <input
-              type="radio"
-              value=""
-              checked={mode === ''}
-              onChange={(e) => setMode(e.target.value)}
-              className="mr-2"
-            />
-            <span>Normal</span>
-          </label>
-          <label className="inline-flex items-center mr-4">
-            <input
-              type="radio"
-              value="vid"
-              checked={mode === 'vid'}
-              onChange={(e) => setMode(e.target.value)}
-              className="mr-2"
-            />
-            <span>Video</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              value="isch"
-              checked={mode === 'isch'}
-              onChange={(e) => setMode(e.target.value)}
-              className="mr-2"
-            />
-            <span>Image</span>
-          </label>
-        </div>
-      </label>
+      <ModeSelector />
       {/* half left and right */}
       <div className="flex justify-between w-full">
         <label className="block">
