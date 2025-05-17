@@ -5,14 +5,16 @@ export function useDateRange(initialStart: string, initialEnd: string) {
   // YYYY-MM-DD
   const [start, setStart] = useLocalStorage('start', initialStart)
   const [end, setEnd] = useLocalStorage('end', initialEnd)
+  const setStartDate = (date: Date) => setStart(formatDate(date))
+  const setEndDate = (date: Date) => setEnd(formatDate(date))
 
   const slideMonth = (delta: number) => {
     const s = new Date(start)
     const e = new Date(end)
     s.setMonth(s.getMonth() + delta)
     e.setMonth(e.getMonth() + delta)
-    setStart(formatDate(s))
-    setEnd(formatDate(e))
+    setStartDate(s)
+    setEndDate(e)
   }
 
   const step = () => {
@@ -21,14 +23,14 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     const diff = e.getTime() - s.getTime()
     const newStart = new Date(e)
     const newEnd = new Date(e.getTime() + diff)
-    setStart(formatDate(newStart))
-    setEnd(formatDate(newEnd))
+    setStartDate(newStart)
+    setEndDate(newEnd)
   }
 
   const addMonthsToEnd = (delta: number) => {
     const e = new Date(end)
     e.setMonth(e.getMonth() + delta)
-    setEnd(e.toISOString().split('T')[0])
+    setEndDate(e)
   }
 
   const addYears = (delta: number) => {
@@ -36,8 +38,8 @@ export function useDateRange(initialStart: string, initialEnd: string) {
     const e = new Date(end)
     s.setFullYear(s.getFullYear() + delta)
     e.setFullYear(e.getFullYear() + delta)
-    setStart(formatDate(s))
-    setEnd(formatDate(e))
+    setStartDate(s)
+    setEndDate(e)
   }
 
   return {
