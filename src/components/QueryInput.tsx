@@ -1,11 +1,9 @@
-import React from 'react'
-
-interface QueryInputProps {
+interface Props {
   query: string
   setQuery: (query: string) => void
 }
 
-export const QueryInput: React.FC<QueryInputProps> = ({ query, setQuery }) => {
+export const QueryInput = ({ query, setQuery }: Props) => {
   return (
     <label className="block">
       Query:

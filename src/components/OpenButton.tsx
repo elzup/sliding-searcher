@@ -1,11 +1,10 @@
-import React from 'react'
 import Button from '@mui/material/Button'
 
-interface OpenButtonProps {
+interface Props {
   url: string
 }
 
-const OpenButton: React.FC<OpenButtonProps> = ({ url }) => {
+const OpenButton = ({ url }: Props) => {
   const handleOpen = () => {
     window.open(url, '_blank')
   }

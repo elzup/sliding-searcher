@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useDateRange } from './hooks/useDateRange'
+import { useState } from 'react'
 import { UrlGenerator } from './components/UrlGenerator'
-import { QueryForm } from './QueryForm'
+import { useDateRange } from './hooks/useDateRange'
 import { useLocalStorage } from './hooks/useLocalStorage'
+import { QueryForm } from './QueryForm'
 
-const App: React.FC = () => {
+const App = () => {
   const [query, setQuery] = useLocalStorage('query', '')
   const [mode, setMode] = useState('')
   const {

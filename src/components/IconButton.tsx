@@ -1,4 +1,3 @@
-import React from 'react'
 import type { IconType } from 'react-icons'
 
 type Props = {
@@ -9,13 +8,13 @@ type Props = {
   iconPosition?: `left` | `right`
 }
 
-export const IconButton: React.FC<Props> = ({
+export const IconButton = ({
   icon: Icon,
   text,
   onClick,
   className,
   iconPosition = `left`,
-}) => {
+}: Props) => {
   return (
     <button
       onClick={onClick}

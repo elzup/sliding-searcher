@@ -1,4 +1,3 @@
-import React from 'react'
 import type { SearchParam } from '../types'
 
 const generateSearchUrl = ({ query, start, end, mode }: SearchParam) => {
@@ -18,7 +17,7 @@ interface Props {
   param: SearchParam
 }
 
-export const UrlGenerator: React.FC<Props> = ({ param }) => {
+export const UrlGenerator = ({ param }: Props) => {
   const url = generateSearchUrl(param)
 
   return (

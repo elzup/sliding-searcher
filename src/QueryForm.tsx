@@ -1,4 +1,3 @@
-import React from 'react'
 import { RiExpandRightLine } from 'react-icons/ri'
 import {
   TiMediaFastForward,
@@ -6,11 +5,11 @@ import {
   TiMediaPlayReverse,
   TiMediaRewind,
 } from 'react-icons/ti'
+import { DateRangeBar } from './components/DateRangeBar'
 import { IconButton } from './components/IconButton'
 import { QueryInput } from './components/QueryInput'
-import { DateRangeBar } from './components/DateRangeBar'
 
-interface QueryFormProps {
+interface Props {
   query: string
   setQuery: (query: string) => void
   mode: string
@@ -25,7 +24,7 @@ interface QueryFormProps {
   addYears: (amount: number) => void
 }
 
-export const QueryForm: React.FC<QueryFormProps> = ({
+export const QueryForm = ({
   query,
   setQuery,
   mode,
@@ -38,7 +37,7 @@ export const QueryForm: React.FC<QueryFormProps> = ({
   step,
   addMonthsToEnd,
   addYears,
-}) => {
+}: Props) => {
   return (
     <div className="space-y-2">
       <QueryInput query={query} setQuery={setQuery} />
@@ -78,9 +77,10 @@ export const QueryForm: React.FC<QueryFormProps> = ({
           </label>
         </div>
       </label>
-      <div className="flex">
+      {/* half left and right */}
+      <div className="flex justify-between w-full">
         <label className="block">
-          Start:{' '}
+          Start:
           <input
             type="date"
             value={start}
@@ -89,7 +89,7 @@ export const QueryForm: React.FC<QueryFormProps> = ({
           />
         </label>
         <label className="block">
-          End:{' '}
+          End:
           <input
             type="date"
             value={end}
